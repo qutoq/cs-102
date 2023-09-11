@@ -172,6 +172,8 @@ def check_solution(solution: tp.List[tp.List[str]]) -> bool:
             return False
         if len(set(get_col(solution, (0, pos)))) != 9:
             return False
+        if '.' in get_row(solution, (pos, 0)):
+            return False
 
     for b_row in range(3):
         for b_col in range(3):
