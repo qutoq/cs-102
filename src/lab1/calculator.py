@@ -13,6 +13,7 @@ doc - справка
 и менять их значение: a = 5 ; a * 2 -> 10
 e и p уже используется
 если переменная не была задана, то её значение 0.0
+vars - список заданных переменных
 ***"""
     oper = "()+-*/%="
     vars = defaultdict(float)
@@ -98,7 +99,7 @@ e и p уже используется
             elif formula == "doc":
                 print(self.doc)
             elif formula == "vars":
-                print(self.vars)
+                print(self.vars.items())
             else:
                 self.solve(formula)
 
