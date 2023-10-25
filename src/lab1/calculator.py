@@ -15,7 +15,7 @@ e и p уже используется
 если переменная не была задана, то её значение 0.0
 vars - список заданных переменных
 ***"""
-    oper = "()+-*/%="
+    oper = "()+-*/%=. "
     vars = defaultdict(float)
     vars["p"] = math.pi
     vars["e"] = math.e
@@ -23,32 +23,31 @@ vars - список заданных переменных
     def solve(self, formula):
         status = self.check(formula)
         if status != "OK" or status != "OK":
-            print(status)
-            return
+            return status
         formula = self.reformat(formula)
         if "=" in formula:
-            self.if_eq(formula)
+            return self.if_eq(formula)
         elif formula == "":
             pass
         else:
             try:
-                print(eval(formula, {"vars": self.vars}))
+                return eval(formula, {"vars": self.vars})
             except Exception as err:
-                print(err)
+                return err
 
     def if_eq(self, formula):
         if not (len(formula) > 9 and formula[9] == "="):
-            print("Знак = не на своём месте")
+            return "Знак = не на своём месте"
         elif formula[:4] != "vars":
-            print(formula[:4])
+            return formula[:4]
         else:
             element = formula[6]
             try:
                 result = eval(formula[10:], {"vars": self.vars})
                 self.vars[element] = result
-                print(result)
+                return result
             except Exception as err:
-                print(err)
+                return err
 
     def reformat(self, formula) -> str:
         result = ""
@@ -101,7 +100,7 @@ vars - список заданных переменных
             elif formula == "vars":
                 print(self.vars.items())
             else:
-                self.solve(formula)
+                print(self.solve(formula))
 
     def stop(self):
         print("\nДо встречи")
